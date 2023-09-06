@@ -1,34 +1,35 @@
 """add user table
 
-Revision ID: 8c82b1632f52
-Revises: 01b2584928a5
-Create Date: 2021-08-29 23:04:56.038967
+Revision ID: 1731847b031f
+Revises: c8df2c068a8a
+Create Date: 2023-09-05 20:41:24.232413
 
 """
+from typing import Sequence, Union
+
 from alembic import op
 import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8c82b1632f52'
-down_revision = '01b2584928a5'
-branch_labels = None
-depends_on = None
+revision: str = '1731847b031f'
+down_revision: Union[str, None] = 'c8df2c068a8a'
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
 
 
-def upgrade():
+def upgrade() -> None:
     op.create_table('users',
                     sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('email', sa.String(), nullable=False),
                     sa.Column('password', sa.String(), nullable=False),
-                    sa.Column('created_at', sa.TIMESTAMP(timezone=True),
-                              server_default=sa.text('now()'), nullable=False),
+                    sa.Column('created_at', sa.TIMESTAMP(timezone=True),server_default=sa.text('now()'), nullable=False),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('email')
                     )
     pass
 
 
-def downgrade():
+def downgrade() -> None:
     op.drop_table('users')
     pass

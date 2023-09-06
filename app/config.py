@@ -1,4 +1,7 @@
-from pydantic import BaseSettings
+from typing_extensions import Annotated
+
+from pydantic import BaseModel, Field
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
